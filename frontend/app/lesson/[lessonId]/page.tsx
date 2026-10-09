@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense,useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { apiFetch } from "@/lib/api";
@@ -28,7 +28,7 @@ type LessonResponse = {
   exercises: LessonExercise[];
 };
 
-export default function LessonPage() {
+function LessonContent() {
   const params = useParams<{ lessonId: string }>();
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -329,5 +329,19 @@ export default function LessonPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function LessonPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="duo-container flex min-h-screen items-center justify-center">
+          <p className="font-bold text-muted">Loading lesson...</p>
+        </main>
+      }
+    >
+      <LessonContent />
+    </Suspense>
   );
 }

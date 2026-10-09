@@ -5,6 +5,7 @@ import { apiFetch } from "@/lib/api";
 import type { HomeResponse } from "@/lib/types";
 import TopBar from "./TopBar";
 import BottomNav from "./BottomNav";
+import { Suspense } from "react";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
@@ -43,7 +44,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
       <div className="min-w-0 flex-1 pb-24">{children}</div>
 
-      <BottomNav />
+      <Suspense fallback={null}>
+        <BottomNav />
+      </Suspense>
     </div>
   );
 }
