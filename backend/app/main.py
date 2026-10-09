@@ -21,7 +21,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://duolingo-clone.vercel.app",
+        "https://duolingo-clone-6hr3.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
